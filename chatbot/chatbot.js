@@ -5,9 +5,10 @@ require('dotenv').config()
 const sessionClient = new dialogFlow.SessionsClient({keyFilename: "../app/service_account.json"})
 const sessionPath = sessionClient.sessionPath(process.env.GOOGLE_PROJECT_ID, process.env.DIALOGFLOW_SESSION_ID)
 
+const handlAction = (response) => response
+
 module.exports= {
     textQuery: async (text, params={}) =>{
-        let self = module.exports
         const request = {
             session: sessionPath,
             queryInput: {
@@ -24,10 +25,7 @@ module.exports= {
               }
             },
           };
-        responses = await self.handlAction(request)
+        let responses = await handlAction(request)
         return await sessionClient.detectIntent(responses);
-    },
-    handleAction: (responses)=> {
-      return responses
     }
 }
