@@ -7,8 +7,8 @@ const sessionPath = sessionClient.sessionPath(process.env.GOOGLE_PROJECT_ID, pro
 
 const handlAction = (response) => response
 
-module.exports= {
-    textQuery: async (text, params={}) =>{
+
+const textQuery = async (text, params={}) =>{
         const request = {
             session: sessionPath,
             queryInput: {
@@ -28,4 +28,7 @@ module.exports= {
         let responses = await handlAction(request)
         return await sessionClient.detectIntent(responses);
     }
+
+module.exports= {
+  textQuery
 }
