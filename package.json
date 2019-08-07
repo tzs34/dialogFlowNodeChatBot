@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:backend": "nodemon index.js"
+    "start:backend": "nodemon index.js",
+    "start:client":"npm run start --prefix client",
+    "start:all":"concurrenty \"npm run start:backend\" \"npm run start:client\""
   },
   "author": "",
   "license": "ISC",
