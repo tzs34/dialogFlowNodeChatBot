@@ -6,7 +6,7 @@ const sessionClient = new dialogFlow.SessionsClient({keyFilename: "../app/servic
 const sessionPath = sessionClient.sessionPath(process.env.GOOGLE_PROJECT_ID, process.env.DIALOGFLOW_SESSION_ID)
 
 module.exports= {
-    textQuery: async (text) =>{
+    textQuery: async (text, params={}) =>{
         const request = {
             session: sessionPath,
             queryInput: {
