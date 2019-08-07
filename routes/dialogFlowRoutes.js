@@ -8,7 +8,7 @@ module.exports = (app) =>{
     
     app.get('/api/df_text_query', async (req, res) => {
         
-          let response = await chatBot.textQuery(req.body.text)
+          let response = await chatBot.textQuery(req.body.text, req.body.parameters)
           const result = response[0].queryResult;
           console.log(`  Query: ${result.queryText}`);
           console.log(`  Response: ${result.fulfillmentText}`);
