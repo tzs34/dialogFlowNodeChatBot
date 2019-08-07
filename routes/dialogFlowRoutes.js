@@ -13,7 +13,7 @@ module.exports = (app) =>{
     })
     
     app.get('/api/df_event_query', async(req, res) => {
-      let response = await chatBot.eventQuery(req.body.text, req.body.parameters)
+      let response = await chatBot.eventQuery(req.body.event, req.body.parameters)
       res.send(response[0].queryResult);
     })
 }
