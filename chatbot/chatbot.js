@@ -3,7 +3,12 @@ const dialogFlow = require('dialogflow')
 const structjson = require('./structjson')
 require('dotenv').config()
 
-const sessionClient = new dialogFlow.SessionsClient({keyFilename: "../app/service_account.json"})
+const credentials = {
+  client_email: process.env.GA_CLIENT_EMAIL,
+  private_key: process.env.GA_PRIVATE_KEY
+}
+
+const sessionClient = new dialogFlow.SessionsClient({projectID:process.env.GOOGLE_PROJECT_ID, credentials:credentials})
 const sessionPath = sessionClient.sessionPath(process.env.GOOGLE_PROJECT_ID, process.env.DIALOGFLOW_SESSION_ID)
 
 const handlAction = (response) => response
