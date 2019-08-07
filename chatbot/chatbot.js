@@ -1,5 +1,6 @@
 'use strict'
 const dialogFlow = require('dialogflow')
+const structjson = require('./structjson')
 require('dotenv').config()
 
 const sessionClient = new dialogFlow.SessionsClient({keyFilename: "../app/service_account.json"})
@@ -29,6 +30,24 @@ const textQuery = async (text, params={}) =>{
         return await sessionClient.detectIntent(responses);
     }
 
+    const eventQuery = async (e, params={}) =>{
+      const request = {
+          session: sessionPath,
+          queryInput: {
+            event: {
+              // The query to send to the dialogflow agent
+              name: 'welcome', //e,
+              parameters: structjson.jsonToStructProto(params),
+              // The language used by the client (en-US)
+              languageCode: process.env.DIALOGFLOW_LANG_CODE,
+            }
+          },
+        };
+      let responses = await handlAction(request)
+      return await sessionClient.detectIntent(responses);
+  }
+
 module.exports= {
-  textQuery
+  textQuery,
+  eventQuery
 }
