@@ -1,7 +1,10 @@
 'use strict'
 const dialogFlow = require('dialogflow')
 const structjson = require('./structjson')
-require('dotenv').config()
+
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config()
+}
 
 const credentials = {
   client_email: process.env.GA_CLIENT_EMAIL,
