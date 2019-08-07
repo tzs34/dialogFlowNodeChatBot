@@ -7,6 +7,7 @@ const sessionPath = sessionClient.sessionPath(process.env.GOOGLE_PROJECT_ID, pro
 
 module.exports= {
     textQuery: async (text, params={}) =>{
+        let self = module.exports
         const request = {
             session: sessionPath,
             queryInput: {
@@ -16,8 +17,17 @@ module.exports= {
                 // The language used by the client (en-US)
                 languageCode: process.env.DIALOGFLOW_LANG_CODE,
               },
+              queryParams:{
+                payload:{
+                  data: params
+                }
+              }
             },
           };
-        return await sessionClient.detectIntent(request);
+        responses = await self.handlAction(request)
+        return await sessionClient.detectIntent(responses);
+    },
+    handleAction: (responses)=> {
+      return responses
     }
 }
